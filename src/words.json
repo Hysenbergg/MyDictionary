@@ -1,0 +1,64 @@
+[
+     {
+        "id": 1,
+        "firstWord": "computer",
+        "secondWord": "bilgisayar"
+    },
+    {
+        "id": 2,
+        "firstWord": "hello",
+        "secondWord": "merhaba"
+    },
+    {
+        "id": 3,
+        "firstWord": "keyboard",
+        "secondWord": "klavye"
+    },
+    {
+        "id": 4,
+        "firstWord": "class",
+        "secondWord": "sınıf"
+    },
+    {
+        "id": 5,
+        "firstWord": "function",
+        "secondWord": "fonksiyon"
+    },
+    {
+        "id": 6,
+        "firstWord": "object",
+        "secondWord": "nesne"
+    },
+    {
+        "id": 7,
+        "firstWord": "software",
+        "secondWord": "yazılım"
+    },
+    {
+        "id": 8,
+        "firstWord": "clock",
+        "secondWord": "saat"
+    },
+    {
+        "id": 9,
+        "firstWord": "ghost",
+        "secondWord": "hayalet"
+    },
+    {
+        "id": 10,
+        "firstWord": "page",
+        "secondWord": "sayfa"
+    },
+    {
+        "id": 11,
+        "firstWord": "word",
+        "secondWord": "kelime"
+    },
+    {
+        "id": 12,
+        "firstWord": "add",
+        "secondWord": "eklemek"
+    }
+]
+    
+    
