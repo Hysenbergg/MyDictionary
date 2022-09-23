@@ -19,7 +19,7 @@ const AddToWordPage = ({navigation}) => {
                 secondWord: secondWord,
             }
         };
-        navigation.navigate("ListingWordsPage", {words})        
+        navigation.navigate("ListingWordsPage", {words});        
     }
 
     return(
