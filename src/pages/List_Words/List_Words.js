@@ -18,6 +18,7 @@ function List_Words() {
               <Text style={styles.word} >{words.english_word} </Text>
               <Text style={styles.word_isaret}>- | -</Text>
               <Text style={styles.word}>{words.turkish_word} </Text>
+              <Text>{words.word_category}</Text>
             </View>
           </View>
         ))}

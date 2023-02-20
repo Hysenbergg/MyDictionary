@@ -15,6 +15,7 @@ function Create_Realm({navigation}) {
           word_id: {type: 'int', default: 0},
           english_word: 'string',
           turkish_word: 'string',
+          word_category: 'string'
         },
       },
     ],
