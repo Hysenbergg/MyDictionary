@@ -46,13 +46,11 @@ function Random_Word() {
         <Text style={styles.ing_word_title}> İngilizce Kelime </Text>
         <Text style={styles.ing_word}> {randomIngWord} </Text>
       </View>
-      <View style={styles.input_container} >
-        <TextInput
-          placeholder="Türkçe Karşılığını giriniz.."
-          value={TurkWord}
-          onchange={setTurkWord}
-        />
-      </View>
+      <TextInput
+        placeholder="Türkçe Karşılığını giriniz.."
+        value={TurkWord}
+        onchange={setTurkWord}
+      />
       <Button ButtonText="Rastgele" onClick={handleRandomWordClick} />
       <Button ButtonText="Test Et" onClick={handleWordCheck} />
     </View>

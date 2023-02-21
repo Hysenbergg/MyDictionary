@@ -7,7 +7,6 @@ export default StyleSheet.create({
     padding: 10,
   },
   title_container: {
-    flex: 0.2,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -18,7 +17,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   random_word_container: {
-    flex: 0.25,
     margin: 10,
     alignItems: 'center',
   },
@@ -37,5 +35,4 @@ export default StyleSheet.create({
     borderRadius: 15,
     borderColor: 'orange',
   },
-  input_container: { flex: 0.12 }
 });

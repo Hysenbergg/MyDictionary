@@ -1,11 +1,10 @@
 import React from 'react';
-import {SafeAreaView, View, Text } from 'react-native';
+import {SafeAreaView, View, Text, Image} from 'react-native';
 import Button from '../../components/Button';
 import styles from './Create_Realm.style';
 import Realm from 'realm';
 
 function Create_Realm({navigation}) {
-
   new Realm({
     path: 'WordDatabase.realm',
     schema: [
@@ -15,7 +14,7 @@ function Create_Realm({navigation}) {
           word_id: {type: 'int', default: 0},
           english_word: 'string',
           turkish_word: 'string',
-          word_category: 'string'
+          word_category: 'string',
         },
       },
     ],
@@ -23,8 +22,10 @@ function Create_Realm({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}> MyDictionary </Text>
-      <View style={styles.buttons_container} >
+      <View style={styles.logo_container} >
+        <Image style={styles.logo} source={require('../../assets/MyDictionaryLogo.png')} />
+      </View>
+      <View style={styles.buttons_container}>
         <Button
           ButtonText="Add Word"
           onClick={() => navigation.navigate('AddWordPages')}
