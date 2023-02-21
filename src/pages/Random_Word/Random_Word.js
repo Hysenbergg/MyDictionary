@@ -39,16 +39,20 @@ function Random_Word() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> Rastgele Kelime Sayfası </Text>
-      <View style={styles.random_word_container} >
+      <View style={styles.title_container}>
+        <Text style={styles.title}> Rastgele Kelime Sayfası </Text>
+      </View>
+      <View style={styles.random_word_container}>
         <Text style={styles.ing_word_title}> İngilizce Kelime </Text>
         <Text style={styles.ing_word}> {randomIngWord} </Text>
       </View>
-      <TextInput
-        placeholder="Türkçe Karşılığını giriniz.."
-        value={TurkWord}
-        onchange={setTurkWord}
-      />
+      <View style={styles.input_container} >
+        <TextInput
+          placeholder="Türkçe Karşılığını giriniz.."
+          value={TurkWord}
+          onchange={setTurkWord}
+        />
+      </View>
       <Button ButtonText="Rastgele" onClick={handleRandomWordClick} />
       <Button ButtonText="Test Et" onClick={handleWordCheck} />
     </View>

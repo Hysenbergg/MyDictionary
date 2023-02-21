@@ -81,18 +81,18 @@ function Add_Word({navigation}) {
               borderWidth: 1,
               margin: 10,
               borderRadius: 15,
-              borderColor: 'purple',
+              borderColor: 'orange',
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <RadioButton value="günlük yasam" />
+              <RadioButton value="günlük yasam" color='orange'/>
               <Text>Günlük Yaşam</Text>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <RadioButton value="meslek" />
+              <RadioButton value="meslek" color='orange' />
               <Text>Meslek</Text>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <RadioButton value="egitim" />
+              <RadioButton value="egitim" color='orange' />
               <Text>Eğitim</Text>
             </View>
           </View>

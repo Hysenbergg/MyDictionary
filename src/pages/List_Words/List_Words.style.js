@@ -12,6 +12,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   word_container: {
+    flex: 1,
     margin: 10,
     backgroundColor: 'gray',
     borderRadius: 15,
@@ -25,18 +26,30 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   word_inner_container: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
   word_isaret: {
+    flex: 0.1,
     color: 'white',
     fontSize: 32,
-    fontWeight: '600'
+    fontWeight: '600',
+    textAlign: 'center',
   },
   word: {
+    flex: 0.45,
     color: 'white',
     fontSize: 24,
-    fontWeight: '600'
+    fontWeight: '600',
+    textAlign: 'center',
   },
+  category_text: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+    paddingTop: 8,
+    fontWeight: '600',
+  }
 });
