@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, Alert} from 'react-native';
 import Button from '../../components/Button';
 import TextInput from '../../components/TextInput';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import styles from './Random_Word.style';
 
 const realm = new Realm({path: 'WordDatabase.realm'});
@@ -10,8 +11,33 @@ function Random_Word() {
   const [randomNumber, setRandomNumber] = useState(null);
   const [randomIngWord, setRandomIngWord] = useState('');
   const [TurkWord, setTurkWord] = useState('');
+  // Alert states
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [correctAlert, setCorrectAlert] = useState(false);
+  const [wrongAlert, setWrongAlert] = useState(false);
+
   var word_details = realm.objects('Word_Schema');
   var word_counter = word_details.length;
+
+  // Alert functions.
+  const ShowErrorAlert = () => {
+    setErrorAlert(true);
+  };
+  const HideErrorAlert = () => {
+    setErrorAlert(false);
+  };
+  const ShowCorrectAlert = () => {
+    setCorrectAlert(true);
+  };
+  const HideCorrectAlert = () => {
+    setCorrectAlert(false);
+  };
+  const ShowWrongAlert = () => {
+    setWrongAlert(true);
+  };
+  const HideWrongAlert = () => {
+    setWrongAlert(false);
+  };
 
   // Random Number Creater
   const handleRandomWordClick = () => {
@@ -25,14 +51,14 @@ function Random_Word() {
   // Cevabın Kontrol Edilmesi.
   const handleWordCheck = () => {
     if (!TurkWord) {
-      Alert.alert('Lütfen Türkçe karşılığını giriniz! Boş bıraktınız.');
+      ShowErrorAlert();
       return;
     }
     if (TurkWord === word_details[randomNumber].turkish_word) {
-      Alert.alert('Cevabınız Doğru. Devam Edebilirsiniz.');
+      ShowCorrectAlert();
       setTurkWord('');
     } else {
-      Alert.alert('Cevabınız Maalesef Yanlis. Tekrar Deneyiniz.');
+      ShowWrongAlert();
       setTurkWord('');
     }
   };
@@ -50,6 +76,64 @@ function Random_Word() {
         placeholder="Türkçe Karşılığını giriniz.."
         value={TurkWord}
         onchange={setTurkWord}
+      />
+      {/* Alert Components - Error - Correct - Wrong */}
+      <AwesomeAlert
+        show={errorAlert}
+        showProgress={false}
+        title="HATA"
+        message="Türkçe karşılığını girmediniz."
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={false}
+        showConfirmButton={true}
+        //cancelText="No, cancel"
+        confirmText="Tekrar Dene"
+        confirmButtonColor="orange"
+        /*onCancelPressed={() => {
+          hideAlert();
+        }}*/
+        onConfirmPressed={() => {
+          HideErrorAlert();
+        }}
+      />
+      <AwesomeAlert
+        show={correctAlert}
+        showProgress={false}
+        title="Doğru :)"
+        message="Cevabı doğru olarak bildiniz."
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={false}
+        showConfirmButton={true}
+        //cancelText="No, cancel"
+        confirmText="Devam Et"
+        confirmButtonColor="orange"
+        /*onCancelPressed={() => {
+          hideAlert();
+        }}*/
+        onConfirmPressed={() => {
+          HideCorrectAlert();
+        }}
+      />
+      <AwesomeAlert
+        show={wrongAlert}
+        showProgress={false}
+        title="Maalesef :("
+        message="Cevabı yanlış tahmin ettiniz."
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={false}
+        showConfirmButton={true}
+        //cancelText="No, cancel"
+        confirmText="Tekrar Dene"
+        confirmButtonColor="orange"
+        /*onCancelPressed={() => {
+          hideAlert();
+        }}*/
+        onConfirmPressed={() => {
+          HideWrongAlert();
+        }}
       />
       <Button ButtonText="Rastgele" onClick={handleRandomWordClick} />
       <Button ButtonText="Test Et" onClick={handleWordCheck} />

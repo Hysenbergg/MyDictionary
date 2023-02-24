@@ -4,6 +4,7 @@ import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import {RadioButton} from 'react-native-paper';
 import styles from './Add_Word.style';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import Realm from 'realm';
 let realm;
 
@@ -11,14 +12,31 @@ function Add_Word({navigation}) {
   const [ingWord, setIngWord] = useState('');
   const [turkWord, setTurkWord] = useState('');
   const [wordCategory, setWordCategory] = useState('');
+  // alert states
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [submitCompAlert, setSubmitCompAlert] = useState(false);
 
   useEffect(() => {
     realm = new Realm({path: 'WordDatabase.realm'});
   }, []);
 
+  // Alert functions
+  const ShowErrorAlert = () => {
+    setErrorAlert(true);
+  };
+  const hideErrorAlert = () => {
+    setErrorAlert(false);
+  };
+  const ShowSubmitCompAlert = () => {
+    setSubmitCompAlert(true);
+  };
+  const HideSubmitCompAlert = () => {
+    setSubmitCompAlert(false);
+  };
+
   const handleSubmit = () => {
     if (!ingWord || !turkWord || !wordCategory) {
-      Alert.alert('Lütfen boşta bir alan var, boş bırakmayınız.');
+      ShowErrorAlert();
       return;
     }
 
@@ -33,28 +51,7 @@ function Add_Word({navigation}) {
         turkish_word: turkWord,
         word_category: wordCategory,
       });
-      Alert.alert(
-        'Success',
-        'Kelime ekleme işlemi başarılı bir şekilde gerçekleştirildi.',
-        [
-          {
-            text: 'Tamam',
-            onPress: () => navigation.navigate('CreateRealmPages'),
-          },
-        ],
-        {cancelable: false},
-      );
-      console.log(
-        'Kelimeler eklendi: ' +
-          ' id: ' +
-          ID +
-          ' ' +
-          ingWord +
-          ' ' +
-          turkWord +
-          ' cat: ' +
-          wordCategory,
-      );
+      ShowSubmitCompAlert();
     });
   };
 
@@ -71,6 +68,7 @@ function Add_Word({navigation}) {
         value={turkWord}
         onchange={setTurkWord}
       />
+      {/* RadioButton's Component */}
       <View>
         <RadioButton.Group
           onValueChange={newValue => setWordCategory(newValue)}
@@ -84,16 +82,16 @@ function Add_Word({navigation}) {
               borderColor: 'orange',
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <RadioButton value="günlük yasam" color='orange'/>
-              <Text>Günlük Yaşam</Text>
+              <RadioButton value="günlük yasam" color="orange" />
+              <Text style={{color: 'black', fontSize: 15}}>Günlük Yaşam</Text>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <RadioButton value="meslek" color='orange' />
-              <Text>Meslek</Text>
+              <RadioButton value="meslek" color="orange" />
+              <Text style={{color: 'black', fontSize: 15}}>Meslek</Text>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <RadioButton value="egitim" color='orange' />
-              <Text>Eğitim</Text>
+              <RadioButton value="egitim" color="orange" />
+              <Text style={{color: 'black', fontSize: 15}}>Eğitim</Text>
             </View>
           </View>
           <>
@@ -103,6 +101,46 @@ function Add_Word({navigation}) {
           </>
         </RadioButton.Group>
       </View>
+      {/* Alert Components - Error - Submit */}
+      <AwesomeAlert
+        show={errorAlert}
+        showProgress={false}
+        title="HATA"
+        message="Zorunlu olan bir alanı bos bıraktınız."
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={false}
+        showConfirmButton={true}
+        //cancelText="No, cancel"
+        confirmText="Düzeltiyorum"
+        confirmButtonColor="orange"
+        /*onCancelPressed={() => {
+          hideAlert();
+        }}*/
+        onConfirmPressed={() => {
+          hideErrorAlert();
+        }}
+      />
+      <AwesomeAlert
+        show={submitCompAlert}
+        showProgress={false}
+        title="Başarılı"
+        message="Kelime ekleme işlemi başarılı bir şekilde gerçekleşti."
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={false}
+        showConfirmButton={true}
+        //cancelText="No, cancel"
+        confirmText="Tamam"
+        confirmButtonColor="orange"
+        /*onCancelPressed={() => {
+          hideAlert();
+        }}*/
+        onConfirmPressed={() => {
+          HideSubmitCompAlert();
+          navigation.navigate('CreateRealmPages');
+        }}
+      />
       <Button ButtonText="Kaydet" onClick={handleSubmit} />
     </View>
   );
