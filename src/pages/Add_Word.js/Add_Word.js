@@ -3,6 +3,9 @@ import {View, Text, Alert} from 'react-native';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import {RadioButton} from 'react-native-paper';
+import IconButton from '../../components/IconButton';
+//import FAB from '../../components/Fab';
+//import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './Add_Word.style';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Realm from 'realm';
@@ -141,7 +144,7 @@ function Add_Word({navigation}) {
           navigation.navigate('CreateRealmPages');
         }}
       />
-      <Button ButtonText="Kaydet" onClick={handleSubmit} />
+      <Button btnColor="orange" textColor="black" ButtonText="Kaydet" onClick={handleSubmit} />
     </View>
   );
 }

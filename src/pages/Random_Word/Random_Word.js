@@ -3,6 +3,7 @@ import {View, Text, Alert} from 'react-native';
 import Button from '../../components/Button';
 import TextInput from '../../components/TextInput';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import IconButton from '../../components/IconButton';
 import styles from './Random_Word.style';
 
 const realm = new Realm({path: 'WordDatabase.realm'});
@@ -135,8 +136,18 @@ function Random_Word() {
           HideWrongAlert();
         }}
       />
-      <Button ButtonText="Rastgele" onClick={handleRandomWordClick} />
-      <Button ButtonText="Test Et" onClick={handleWordCheck} />
+      <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+        <IconButton
+          icon="restore"
+          buttonTitle="Rastgele"
+          onPress={handleRandomWordClick}
+        />
+        <IconButton
+          icon="check-circle-outline"
+          buttonTitle="Kontrol Et"
+          onPress={handleWordCheck}
+        />
+      </View>
     </View>
   );
 }

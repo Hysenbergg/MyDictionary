@@ -1,55 +1,50 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  container: {flex: 1,margin: 10, padding: 10},
-  title: {
+  container: {
+    flex: 1,
+  },
+  title_container: {
+    marginRight: 5,
+    marginLeft: 5,
+    marginTop: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: 'gray',
-    fontSize: 32,
-    textAlign: 'center',
-    color: '#e7aa0a',
-    borderRadius: 15,
-    padding: 7,
-    fontWeight: 'bold',
+    padding: 8,
+    borderRadius: 5
+  },
+  title: {
+    color: 'white',
+    fontSize: 24,
   },
   word_container: {
-    flex: 1,
-    margin: 10,
-    backgroundColor: 'gray',
-    borderRadius: 15,
-    padding: 15,
-    paddingBottom: 20
+    margin: 5,
+    marginLeft: 8,
+    flexDirection: 'row',
   },
-  word_no: {
-    textAlign: 'center',
-    fontSize: 32,
+  id_container: {
+    alignItems: 'center',
+    padding: 8,
+    backgroundColor: 'gray',
+    borderBottomLeftRadius: 8,
+    borderTopLeftRadius: 8,
+  },
+  id: {
     color: 'orange',
+    fontSize: 20,
     fontWeight: 'bold',
   },
   word_inner_container: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    paddingLeft: 5,
   },
-  word_isaret: {
-    flex: 0.1,
-    color: 'white',
-    fontSize: 32,
-    fontWeight: '600',
-    textAlign: 'center',
+  english_word: {
+    fontSize: 15
   },
-  word: {
-    flex: 0.45,
-    color: 'white',
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  category_text: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
-    paddingTop: 8,
-    fontWeight: '600',
+  turkish_word: {
+    fontSize: 18,
+    color: 'black'
   }
 });

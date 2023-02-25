@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {SafeAreaView, View, Text, ScrollView} from 'react-native';
 import styles from './List_Words.style';
 import SearchBar from '../../components/SearchBar';
+import IconButton from '../../components/IconButton';
 
 const realm = new Realm({path: 'WordDatabase.realm'});
 
-function List_Words() {
+function List_Words({navigation}) {
   var questions = realm.objects('Word_Schema');
   const [list, setList] = useState(questions);
 
+  // Arama kutucuğu componentinin calisma mekanizması.
   const handleSearch = text => {
     const filteredText = questions.filter(word => {
       const searchedText = text.toLowerCase();
@@ -21,23 +23,26 @@ function List_Words() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}> Kelimelerim </Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.title_container}>
+        <Text style={styles.title}> Listem </Text>
+        <IconButton icon="plus" buttonTitle="Kelime Ekle" onPress={() => navigation.navigate('AddWordPages')} />
+      </View>
       <ScrollView>
         <SearchBar onSearch={handleSearch} />
         {list.map((words, index) => (
           <View key={index} style={styles.word_container}>
-            <Text style={styles.word_no}> {words.word_id} </Text>
-            <View style={styles.word_inner_container}>
-              <Text style={styles.word}>{words.english_word} </Text>
-              <Text style={styles.word_isaret}>=</Text>
-              <Text style={styles.word}>{words.turkish_word} </Text>
+            <View style={styles.id_container}>
+              <Text style={styles.id}> {words.word_id} </Text>
             </View>
-            <Text style={styles.category_text}>{words.word_category}</Text>
+            <View style={styles.word_inner_container}>
+              <Text style={styles.english_word}>{words.english_word}: </Text>
+              <Text style={styles.turkish_word}>{words.turkish_word} </Text>
+            </View>
           </View>
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
