@@ -45,6 +45,7 @@ function Random_Word() {
     setTurkWord('');
     var random_number = Math.floor(Math.random() * (word_counter - 0)) + 0;
     setRandomNumber(random_number);
+    console.log('Random number: ' + random_number);
     var intermediate_word = word_details[random_number].english_word;
     setRandomIngWord(intermediate_word);
   };

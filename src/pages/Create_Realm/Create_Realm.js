@@ -27,15 +27,15 @@ function Create_Realm({navigation}) {
       </View>
       <View style={styles.buttons_container}>
         <Button
-          ButtonText="Add Word"
+          ButtonText="Kelime Ekle"
           onClick={() => navigation.navigate('AddWordPages')}
         />
         <Button
-          ButtonText="List Words"
+          ButtonText="Listen"
           onClick={() => navigation.navigate('ListWordsPages')}
         />
         <Button
-          ButtonText="Random Word"
+          ButtonText="Kendini Dene"
           onClick={() => navigation.navigate('RandomWordPages')}
         />
       </View>

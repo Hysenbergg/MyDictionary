@@ -18,6 +18,11 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: 24,
   },
+  deneme: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   word_container: {
     margin: 5,
     marginLeft: 8,
@@ -46,5 +51,6 @@ export default StyleSheet.create({
   turkish_word: {
     fontSize: 18,
     color: 'black'
-  }
+  },
+  iconbutton: {}
 });
