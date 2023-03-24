@@ -71,29 +71,23 @@ function Add_Word({navigation}) {
         />
       </View>
       {/* RadioButton's Component */}
-      <View style={styles.radioButton_container}>
+      <View style={styles.radioButton_group_container}>
         <RadioButton.Group
           onValueChange={newValue => setWordCategory(newValue)}
           value={wordCategory}>
           <View
-            style={{
-              padding: 10,
-              borderWidth: 1,
-              margin: 10,
-              borderRadius: 15,
-              borderColor: 'orange',
-            }}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            style={styles.radioButton_group_inner_container}>
+            <View style={styles.radioButton_container}>
               <RadioButton value="günlük yasam" color="orange" />
-              <Text style={{color: 'black', fontSize: 15}}>Günlük Yaşam</Text>
+              <Text style={styles.radioButton_category_name}>Günlük Yaşam</Text>
             </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <RadioButton value="meslek" color="orange" />
-              <Text style={{color: 'black', fontSize: 15}}>Meslek</Text>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={styles.radioButton_container}>
               <RadioButton value="egitim" color="orange" />
-              <Text style={{color: 'black', fontSize: 15}}>Eğitim</Text>
+              <Text style={styles.radioButton_category_name}>Eğitim</Text>
+            </View>
+            <View style={styles.radioButton_container}>
+              <RadioButton value="meslek" color="orange" />
+              <Text style={styles.radioButton_category_name}>İş</Text>
             </View>
           </View>
         </RadioButton.Group>
