@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Alert} from 'react-native';
+import {View, Text, Alert, ScrollView} from 'react-native';
 import Button from '../../components/Button';
 import TextInput from '../../components/TextInput';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -45,7 +45,6 @@ function Random_Word() {
     setTurkWord('');
     var random_number = Math.floor(Math.random() * (word_counter - 0)) + 0;
     setRandomNumber(random_number);
-    console.log('Random number: ' + random_number);
     var intermediate_word = word_details[random_number].english_word;
     setRandomIngWord(intermediate_word);
   };
@@ -56,7 +55,8 @@ function Random_Word() {
       ShowErrorAlert();
       return;
     }
-    if (TurkWord === word_details[randomNumber].turkish_word) {
+    if (TurkWord.toLowerCase() === word_details[randomNumber].turkish_word) {
+      console.log();
       ShowCorrectAlert();
       setTurkWord('');
     } else {
@@ -71,14 +71,18 @@ function Random_Word() {
         <Text style={styles.title}> Rastgele Kelime Sayfası </Text>
       </View>
       <View style={styles.random_word_container}>
-        <Text style={styles.ing_word_title}> İngilizce Kelime </Text>
-        <Text style={styles.ing_word}> {randomIngWord} </Text>
+        <Text style={styles.ing_word_title}> İngilizce Kelime:</Text>
+        <View style={styles.ing_word_cont}>
+          <Text style={styles.ing_word}> {randomIngWord} </Text>
+        </View>
       </View>
-      <TextInput
-        placeholder="Türkçe Karşılığını giriniz.."
-        value={TurkWord}
-        onchange={setTurkWord}
-      />
+      <View style={styles.input_container}>
+        <TextInput
+          placeholder="Türkçe Karşılığını giriniz.."
+          value={TurkWord}
+          onchange={setTurkWord}
+        />
+      </View>
       {/* Alert Components - Error - Correct - Wrong */}
       <AwesomeAlert
         show={errorAlert}
@@ -137,7 +141,7 @@ function Random_Word() {
           HideWrongAlert();
         }}
       />
-      <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+      <View style={styles.button_container}>
         <IconButton
           icon="restore"
           buttonTitle="Rastgele"

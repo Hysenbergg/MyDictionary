@@ -1,11 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Alert} from 'react-native';
+import {View, Text} from 'react-native';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import {RadioButton} from 'react-native-paper';
-import IconButton from '../../components/IconButton';
-//import FAB from '../../components/Fab';
-//import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './Add_Word.style';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Realm from 'realm';
@@ -24,18 +21,18 @@ function Add_Word({navigation}) {
   }, []);
 
   // Alert functions
-  const ShowErrorAlert = () => {
+  function ShowErrorAlert() {
     setErrorAlert(true);
-  };
-  const hideErrorAlert = () => {
+  }
+  function hideErrorAlert() {
     setErrorAlert(false);
-  };
-  const ShowSubmitCompAlert = () => {
+  }
+  function ShowSubmitCompAlert() {
     setSubmitCompAlert(true);
-  };
-  const HideSubmitCompAlert = () => {
+  }
+  function HideSubmitCompAlert() {
     setSubmitCompAlert(false);
-  };
+  }
 
   const handleSubmit = () => {
     if (!ingWord || !turkWord || !wordCategory) {
@@ -50,8 +47,8 @@ function Add_Word({navigation}) {
           : 1;
       realm.create('Word_Schema', {
         word_id: ID,
-        english_word: ingWord,
-        turkish_word: turkWord,
+        english_word: ingWord.toLowerCase(),
+        turkish_word: turkWord.toLowerCase(),
         word_category: wordCategory,
       });
       ShowSubmitCompAlert();
@@ -61,18 +58,20 @@ function Add_Word({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Kelime Ekleme Sayfası </Text>
-      <TextInput
-        placeholder="İngilizce Kelimeyi Giriniz"
-        value={ingWord}
-        onchange={setIngWord}
-      />
-      <TextInput
-        placeholder="Türkce Kelimeyi Giriniz"
-        value={turkWord}
-        onchange={setTurkWord}
-      />
+      <View style={styles.input_container}>
+        <TextInput
+          placeholder="İngilizce Kelimeyi Giriniz"
+          value={ingWord}
+          onchange={setIngWord}
+        />
+        <TextInput
+          placeholder="Türkce Kelimeyi Giriniz"
+          value={turkWord}
+          onchange={setTurkWord}
+        />
+      </View>
       {/* RadioButton's Component */}
-      <View>
+      <View style={styles.radioButton_container}>
         <RadioButton.Group
           onValueChange={newValue => setWordCategory(newValue)}
           value={wordCategory}>
@@ -97,11 +96,6 @@ function Add_Word({navigation}) {
               <Text style={{color: 'black', fontSize: 15}}>Eğitim</Text>
             </View>
           </View>
-          <>
-            {() => {
-              value;
-            }}
-          </>
         </RadioButton.Group>
       </View>
       {/* Alert Components - Error - Submit */}
@@ -144,7 +138,12 @@ function Add_Word({navigation}) {
           navigation.navigate('CreateRealmPages');
         }}
       />
-      <Button btnColor="orange" textColor="black" ButtonText="Kaydet" onClick={handleSubmit} />
+      <Button
+        btnColor="orange"
+        textColor="black"
+        ButtonText="Kaydet"
+        onClick={() => handleSubmit()}
+      />
     </View>
   );
 }

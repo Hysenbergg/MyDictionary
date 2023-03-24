@@ -9,7 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 // Import Pages
 import Create_Realm from './src/pages/Create_Realm';
-import Add_Word from './src/pages/Add_Word.js/Add_Word';
+import Add_Word from './src/pages/Add_Word.js';
 import List_Words from './src/pages/List_Words';
 import Random_Word from './src/pages/Random_Word';
 

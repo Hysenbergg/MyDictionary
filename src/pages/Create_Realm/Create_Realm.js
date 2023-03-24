@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, Text, Image} from 'react-native';
+import {SafeAreaView, View, Image} from 'react-native';
 import Button from '../../components/Button';
 import styles from './Create_Realm.style';
 import Realm from 'realm';
