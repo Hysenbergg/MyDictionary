@@ -35,16 +35,15 @@ function List_Words({navigation}) {
   const handleWordDeleted = selectedWordId => {
     setSelectedWord_id(selectedWordId);
     realm.write(() => {
-      var ID = selectedWordId;
-      if(
-        realm.objects('Word_Schema').filtered('word_id =' + selected_word_id).length >0
-      ){
-        realm.delete(realm.objects('Word_Schema').filtered('word_id ='+ selected_word_id));
-        var word_details = realm.objects('Word_Schema');
-        console.log(word_details);
-        ShowErrorAlert();
-      }else{
-        Alert.alert('Geçerli bir kelime seçiniz.')
+      const worddd = realm.objects('Word_Schema').filtered(`word_id = ${selectedWordId}`);
+      if(worddd.length > 0) {
+        realm.delete(worddd);
+        const updatedWords = realm.objects('Word_Schema');
+        setList(updatedWords);
+      }else {
+        Alert.alert('Hata', 'İlgili Id adına bir kelime bulunamadı.', [{ text: 'Ok' }], {
+          cancelable: false,
+        });
       }
     })
   };

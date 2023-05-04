@@ -12,6 +12,7 @@ import Create_Realm from './src/pages/Create_Realm';
 import Add_Word from './src/pages/Add_Word.js';
 import List_Words from './src/pages/List_Words';
 import Random_Word from './src/pages/Random_Word';
+import HowToUsePage from './src/pages/HowToUsePage';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ function Router() {
         <Stack.Screen name='AddWordPages' component={Add_Word}/>
         <Stack.Screen name='ListWordsPages' component={List_Words}/>
         <Stack.Screen name='RandomWordPages' component={Random_Word}/>
+        <Stack.Screen name='HowToUsePage' component={HowToUsePage}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

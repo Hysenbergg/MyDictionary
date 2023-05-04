@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import {View, Text, Alert, ScrollView} from 'react-native';
-import Button from '../../components/Button';
+import { View, Text } from 'react-native';
 import TextInput from '../../components/TextInput';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import IconButton from '../../components/IconButton';
 import styles from './Random_Word.style';
-
+// F59C06
 const realm = new Realm({path: 'WordDatabase.realm'});
 
 function Random_Word() {
