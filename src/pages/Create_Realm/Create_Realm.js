@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View, Image, Modal,Pressable, Text } from 'react-native';
+import {SafeAreaView, View, Image, Modal, Text } from 'react-native';
+import { IconButton } from 'react-native-paper';
 import Button from '../../components/Button';
 import styles from './Create_Realm.style';
 import Realm from 'realm';
-import IconButton from '../../components/IconButton';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 function Create_Realm({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [mail, setMail] = useState("huseyinsaidzeyrek@gmail.com");
+
   new Realm({
     path: 'WordDatabase.realm',
     schema: [
@@ -28,6 +31,10 @@ function Create_Realm({navigation}) {
 
   const hideModal = () => {
     setModalVisible(false);
+  }
+
+  const handleCopiedMail = () => {
+    Clipboard.setString(mail);
   }
 
   return (
@@ -63,25 +70,35 @@ function Create_Realm({navigation}) {
         visible={modalVisible}
         onRequestClose={hideModal}
       >
-        <View style={{flex: 1, margin: 20, borderRadius: 15, borderWidth: 1, borderColor: 'orange', backgroundColor: 'white',}}>
-          <View style={{margin: 20, flexDirection: 'row', alignItems:'center' }}>
-            <Text style={{flex: 1, fontSize: 20, color: 'black',}}>Ben Kimim?</Text>
-            <IconButton icon="close-circle-outline" buttonTitle="Kapat" onPress={() => hideModal()} />
+        <View style={styles.modal_container}>
+          <View style={styles.modal_top_container}>
+            <Text style={styles.modal_top_title}>Ben Kimim?</Text>
+            <IconButton icon="close-circle-outline" iconColor='black' size={30} onPress={() => hideModal()} />
           </View>
           <View>
-            <Text style={{borderTopWidth: 1, borderColor: 'black'}}></Text>
+            <Text style={styles.modal_seperator}></Text>
           </View>
-          <View style={{alignItems: 'center'}}>
-            {/*<Image style={{ height: 125, width: 125, resizeMode: 'contain', borderRadius: 10, borderWidth: 1, borderColor: 'orange' }} source={require('../../assets/Hysenberg.jpeg')}/> */}
-            <Text style={{ fontSize: 32, color: 'black', margin: 3, fontWeight: '500'}}>Hüseyin Zeyrek</Text>
+          <View style={styles.modal_logo_container}>
+            <Image style={styles.modal_logo} source={require('../../assets/MyLogo.png')}/>
           </View>
-          <View>
-            <Text>  </Text>
+          <View style={styles.modal_content_container}>
+            <Text style={styles.modal_content}> Bilgisayar Mühendisi adayıyım. Kendimi mobil programlama alanında geliştirmekteyim. Bu uygulamayı İngilizce kelime haznesinde sorun yaşayan ben ve benim gibi kişiler için oluşturmak istedim. Kişisel sözlüğünüzü yöneterek kelime haznenizi geliştirebilirsiniz.</Text>
           </View>
-          <Text>Burası modal</Text>
-          <Pressable onPress={() => setModalVisible(false)}>
-            <Text>Kapat</Text>
-          </Pressable>
+          <View style={styles.modal_second_seperator_container}>
+            <Text style={styles.modal_second_seperator}>-----------------------------------------</Text>
+          </View>
+          <View style={styles.modal_contact_container}>
+            <Text style={styles.modal_contact}>İletişim Bilgileri</Text>
+            <View style={styles.modal_contact_inner_container}>
+              <View style={styles.modal_mail_container}>
+                <Text style={styles.modal_mail_content}>Mail: </Text>
+                <Text style={styles.modal_mail_content}>{mail}</Text> 
+              </View>
+              <View>
+                <IconButton icon="content-copy" iconColor='black' size={20} onPress={handleCopiedMail}/>
+              </View>
+            </View>
+          </View>
         </View>
       </Modal>
     </SafeAreaView>
