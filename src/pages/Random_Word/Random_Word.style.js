@@ -1,47 +1,39 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
-  title_container: {
+  input_container: {
+    flex: 1,
+    marginHorizontal: 20,
+    marginTop: 20,
     justifyContent: 'center',
-    alignItems: 'center',
-    margin: 20,
-    height: 100,
   },
-  title: {
-    fontSize: 32,
-    color: 'orange',
-  },
-  random_word_container: {
-    marginLeft: 20,
-    marginRight: 20,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  ing_word_title: {
-    fontSize: 22,
-    padding: 10,
-    fontWeight: '400',
-    color: 'black',
-  },
-  ing_word_cont: {
-    borderWidth: 1,
-    width: 150,
-    height: 30,
-    alignItems: 'center',
-  },
-  ing_word: {
-    fontSize: 18,
-    color: 'orange',
-  },
-  input_container: {marginLeft: 20, marginRight: 20},
   button_container: {
     margin: 20,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+  },
+  turkish_word_container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  turkish_word_inner_container: {
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 15,
+    marginLeft: 15,
+    paddingHorizontal: 7,
+    paddingVertical: 3,
+    borderStyle: 'dashed',
+  },
+  turkish_word: {
+    fontSize: 21,
+    color: colors.primary,
   },
 });

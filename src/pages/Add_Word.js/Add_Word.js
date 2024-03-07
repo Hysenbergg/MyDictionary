@@ -1,12 +1,67 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import {RadioButton} from 'react-native-paper';
 import styles from './Add_Word.style';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Realm from 'realm';
+import MainHeader from '../../components/Header/MainHeader';
+
 let realm;
+
+const categoryNames = [
+  {
+    id: 0,
+    title: 'Seyahat',
+    value: 'travel',
+  },
+  {
+    id: 1,
+    title: 'Sağlık',
+    value: 'health',
+  },
+  {
+    id: 2,
+    title: 'Eğitim',
+    value: 'education',
+  },
+  {
+    id: 3,
+    title: 'Teknoloji',
+    value: 'technology',
+  },
+  {
+    id: 4,
+    title: 'Spor',
+    value: 'sports',
+  },
+  {
+    id: 5,
+    title: 'Sanat',
+    value: 'art',
+  },
+  {
+    id: 6,
+    title: 'Hava Durumu',
+    value: 'weather',
+  },
+  {
+    id: 7,
+    title: 'İş Dünyası',
+    value: 'business',
+  },
+  {
+    id: 8,
+    title: 'Sosyal İlişkiler',
+    value: 'social',
+  },
+  {
+    id: 9,
+    title: 'Hobiler',
+    value: 'hobbies',
+  },
+];
 
 function Add_Word({navigation}) {
   const [ingWord, setIngWord] = useState('');
@@ -34,6 +89,7 @@ function Add_Word({navigation}) {
     setSubmitCompAlert(false);
   }
 
+  // yeni kelime ekleme fonksiyonu.
   const handleSubmit = () => {
     if (!ingWord || !turkWord || !wordCategory) {
       ShowErrorAlert();
@@ -57,7 +113,7 @@ function Add_Word({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> Kelime Ekleme Sayfası </Text>
+      <MainHeader title="Kelime Ekle" />
       <View style={styles.input_container}>
         <TextInput
           placeholder="İngilizce Kelimeyi Giriniz"
@@ -75,20 +131,21 @@ function Add_Word({navigation}) {
         <RadioButton.Group
           onValueChange={newValue => setWordCategory(newValue)}
           value={wordCategory}>
-          <View
-            style={styles.radioButton_group_inner_container}>
-            <View style={styles.radioButton_container}>
-              <RadioButton value="günlük yasam" color="orange" />
-              <Text style={styles.radioButton_category_name}>Günlük Yaşam</Text>
-            </View>
-            <View style={styles.radioButton_container}>
-              <RadioButton value="egitim" color="orange" />
-              <Text style={styles.radioButton_category_name}>Eğitim</Text>
-            </View>
-            <View style={styles.radioButton_container}>
-              <RadioButton value="meslek" color="orange" />
-              <Text style={styles.radioButton_category_name}>İş</Text>
-            </View>
+          <View style={styles.radioButton_group_inner_container}>
+            <FlatList
+              data={categoryNames}
+              keyExtractor={(item) => item.id}
+              numColumns={2}
+              renderItem={({item}) => (
+                <View key={item.id} style={styles.radioButton_container}>
+                  <RadioButton value={item.value} color="orange" />
+                  <Text style={styles.radioButton_category_name}>
+                    {item.title}
+                  </Text>
+                </View>
+              )}
+            />
+            
           </View>
         </RadioButton.Group>
       </View>
@@ -129,7 +186,9 @@ function Add_Word({navigation}) {
         }}*/
         onConfirmPressed={() => {
           HideSubmitCompAlert();
-          navigation.navigate('CreateRealmPages');
+          setIngWord('');
+          setTurkWord('');
+          setWordCategory('');
         }}
       />
       <Button

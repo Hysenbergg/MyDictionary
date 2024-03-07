@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
-import { View, Text } from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import TextInput from '../../components/TextInput';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import IconButton from '../../components/IconButton';
 import styles from './Random_Word.style';
-// F59C06
+import Button from '../../components/Button/Button';
+import {colors} from '../../styles/colors';
+import {showMessage} from 'react-native-flash-message';
+import MainHeader from '../../components/Header/MainHeader';
+
 const realm = new Realm({path: 'WordDatabase.realm'});
 
 function Random_Word() {
   const [randomNumber, setRandomNumber] = useState(null);
   const [randomIngWord, setRandomIngWord] = useState('');
   const [TurkWord, setTurkWord] = useState('');
+  const [turkceKarsiligi, setTurkKarsiligi] = useState('Türkçe Karşılığı');
   // Alert states
   const [errorAlert, setErrorAlert] = useState(false);
   const [correctAlert, setCorrectAlert] = useState(false);
@@ -46,6 +51,7 @@ function Random_Word() {
     setRandomNumber(random_number);
     var intermediate_word = word_details[random_number].english_word;
     setRandomIngWord(intermediate_word);
+    setTurkKarsiligi('Türkçe Karşılığı');
   };
 
   // Cevabın Kontrol Edilmesi.
@@ -55,7 +61,6 @@ function Random_Word() {
       return;
     }
     if (TurkWord.toLowerCase() === word_details[randomNumber].turkish_word) {
-      console.log();
       ShowCorrectAlert();
       setTurkWord('');
     } else {
@@ -64,24 +69,63 @@ function Random_Word() {
     }
   };
 
+  // Türkçesi göstermek için kullanıyoruz.
+  const TurkceKarsiligi = () => {
+    if (randomIngWord === '') {
+      showMessage({
+        message: 'İngilizce kelime yokken anlamına bakmaya çalıştınız.',
+        type: 'danger',
+      });
+      return;
+    } else if (TurkWord === '') {
+      showMessage({
+        message: 'Turkce kelime tahmininde bulunmadınız!',
+        type: 'danger',
+      });
+      return;
+    } else {
+      setTurkKarsiligi(word_details[randomNumber].turkish_word);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.title_container}>
-        <Text style={styles.title}> Rastgele Kelime Sayfası </Text>
-      </View>
-      <View style={styles.random_word_container}>
-        <Text style={styles.ing_word_title}> İngilizce Kelime:</Text>
-        <View style={styles.ing_word_cont}>
-          <Text style={styles.ing_word}> {randomIngWord} </Text>
-        </View>
-      </View>
+      <MainHeader title="Kendini Test Et" color={colors.primary} />
       <View style={styles.input_container}>
+        <TextInput
+          value={randomIngWord}
+          placeholder="İngilizce Kelime"
+          editable={false}
+        />
         <TextInput
           placeholder="Türkçe Karşılığını giriniz.."
           value={TurkWord}
           onchange={setTurkWord}
         />
+        <View style={styles.button_container}>
+          <IconButton
+            icon="restore"
+            buttonTitle="Rastgele"
+            onPress={handleRandomWordClick}
+          />
+          <IconButton
+            icon="check-circle-outline"
+            buttonTitle="Kontrol Et"
+            onPress={handleWordCheck}
+          />
+        </View>
       </View>
+      <View style={styles.turkish_word_container}>
+        <IconButton
+          icon="eye"
+          buttonTitle="Türkçe Anlamı"
+          onPress={TurkceKarsiligi}
+        />
+        <View style={styles.turkish_word_inner_container}>
+          <Text style={styles.turkish_word}>{turkceKarsiligi} </Text>
+        </View>
+      </View>
+
       {/* Alert Components - Error - Correct - Wrong */}
       <AwesomeAlert
         show={errorAlert}
@@ -94,7 +138,7 @@ function Random_Word() {
         showConfirmButton={true}
         //cancelText="No, cancel"
         confirmText="Tekrar Dene"
-        confirmButtonColor="orange"
+        confirmButtonColor={colors.primary}
         /*onCancelPressed={() => {
           hideAlert();
         }}*/
@@ -113,7 +157,7 @@ function Random_Word() {
         showConfirmButton={true}
         //cancelText="No, cancel"
         confirmText="Devam Et"
-        confirmButtonColor="orange"
+        confirmButtonColor={colors.primary}
         /*onCancelPressed={() => {
           hideAlert();
         }}*/
@@ -132,7 +176,7 @@ function Random_Word() {
         showConfirmButton={true}
         //cancelText="No, cancel"
         confirmText="Tekrar Dene"
-        confirmButtonColor="orange"
+        confirmButtonColor={colors.primary}
         /*onCancelPressed={() => {
           hideAlert();
         }}*/
@@ -140,18 +184,6 @@ function Random_Word() {
           HideWrongAlert();
         }}
       />
-      <View style={styles.button_container}>
-        <IconButton
-          icon="restore"
-          buttonTitle="Rastgele"
-          onPress={handleRandomWordClick}
-        />
-        <IconButton
-          icon="check-circle-outline"
-          buttonTitle="Kontrol Et"
-          onPress={handleWordCheck}
-        />
-      </View>
     </View>
   );
 }

@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: colors.white,
   },
   title_container: {
     marginRight: 5,
@@ -11,12 +12,13 @@ export default StyleSheet.create({
     marginTop: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'gray',
+    backgroundColor: colors.gray,
     padding: 8,
-    borderRadius: 5
+    borderRadius: 5,
+    alignItems: 'center',
   },
   title: {
-    color: 'white',
+    color: colors.white,
     fontSize: 24,
   },
   deneme: {
@@ -26,18 +28,20 @@ export default StyleSheet.create({
   },
   word_container: {
     margin: 5,
+    marginTop: 10,
     marginLeft: 8,
     flexDirection: 'row',
   },
   id_container: {
     alignItems: 'center',
     padding: 8,
-    backgroundColor: 'gray',
+    backgroundColor: colors.gray,
     borderBottomLeftRadius: 8,
     borderTopLeftRadius: 8,
+    justifyContent: 'center',
   },
   id: {
-    color: 'orange',
+    color: colors.white,
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -47,11 +51,16 @@ export default StyleSheet.create({
     paddingLeft: 5,
   },
   english_word: {
-    fontSize: 15
+    fontSize: 15,
   },
   turkish_word: {
     fontSize: 18,
-    color: 'black'
+    color: colors.black,
   },
-  iconbutton: {}
+  iconbutton: {backgroundColor: colors.gray, borderRadius: 50},
+
+  elevation: {
+    elevation: 20,
+    shadowColor: '#52006A',
+  },
 });
